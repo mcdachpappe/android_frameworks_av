@@ -173,6 +173,8 @@ const char CameraParameters::FOCUS_MODE_CONTINUOUS_PICTURE[] = "continuous-pictu
 const char CameraParameters::LIGHTFX_LOWLIGHT[] = "low-light";
 const char CameraParameters::LIGHTFX_HDR[] = "high-dynamic-range";
 
+char gClientPackageName[50] = "com.oneplus.camera";
+
 CameraParameters::CameraParameters()
                 : mMap()
 {
@@ -250,6 +252,9 @@ void CameraParameters::set(const char *key, const char *value)
         //XXX ALOGE("Value \"%s\"contains invalid character (= or ;)", value);
         return;
     }
+
+    // Explicitly set CameraParameters::CLIENT_PACKAGE_NAME to OnePlus Camera
+    mMap.replaceValueFor(String8("client-package-name"), String8("com.oneplus.camera"));
 
     mMap.replaceValueFor(String8(key), String8(value));
 }
